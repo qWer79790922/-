@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>南聯合約管理系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom tweaks to match specific visual style */
+      body {
+        font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffffff;
+      }
+      .table-header {
+        color: #007bff;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+      .btn-primary {
+        background-color: #17a2b8; /* Teal color from screenshot */
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #138496;
+      }
+      /* Hide file input but keep accessible */
+      .input-file {
+        display: none;
+      }
+      /* Global input styling override */
+      input, select, textarea {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      ::placeholder {
+        color: #9ca3af !important;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
