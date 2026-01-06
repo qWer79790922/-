@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Contract } from '../types';
 
@@ -389,7 +390,8 @@ const ContractTable: React.FC<ContractTableProps> = ({ contracts: initialContrac
                       { label: 'Y', value: 'Y' },
                       { label: 'N', value: 'N' }
                     ]}
-                    onSelect={setRenewalFilter}
+                    /* FIX: Wrap state setter to ensure string value is cast to union type correctly */
+                    onSelect={(val) => setRenewalFilter(val as 'ALL' | 'Y' | 'N')}
                     onClose={() => setOpenDropdown(null)}
                     style={{ left: 'auto', right: 0 }}
                   />
@@ -527,7 +529,8 @@ const ContractTable: React.FC<ContractTableProps> = ({ contracts: initialContrac
                         <div className="flex flex-col items-center space-y-2 w-full">
                              <input 
                                 type="file" 
-                                ref={el => fileInputRefs.current[contract.id] = el}
+                                /* FIX: Ensure ref callback doesn't return the element by using braces */
+                                ref={el => { fileInputRefs.current[contract.id] = el; }}
                                 className="hidden"
                                 onChange={(e) => handleFileChange(e, contract.id)}
                             />

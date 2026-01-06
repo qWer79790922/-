@@ -271,9 +271,9 @@ const LendingList: React.FC = () => {
     <div className="p-8 bg-white min-h-screen">
       <h1 className="text-3xl text-center text-black mb-6 font-bold">合約借閱清單</h1>
       
-      <div className="mb-8 text-gray-500 text-[13px] leading-relaxed max-w-5xl bg-gray-50 p-4 border border-gray-200 rounded">
-        <p className="font-bold mb-1 text-gray-600">【註解說明】</p>
-        <p>1. 借閱完成請打勾。</p>
+      <div className="mb-8 text-gray-500 text-[13px] bg-gray-50 p-4 border border-gray-200 rounded">
+        <span className="font-bold text-gray-600">【註解說明】</span>
+        <span>借閱完成請打勾。</span>
       </div>
 
       <div className="flex items-center justify-between mb-6">
