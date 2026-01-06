@@ -37,7 +37,7 @@ const ApprovalPopover: React.FC<{ approvals?: ApprovalStep[]; onClose: () => voi
       title: '[ 借用單位 ]',
       color: 'text-blue-600',
       items: [
-        { key: '借用單位經辦', label: '經辦' }, // Modified: label changed to '經辦'
+        { key: '借用單位經辦', label: '經辦' },
         { key: '借用-Team主管', label: 'Team主管' },
         { key: '借用-部主管', label: '部主管' }
       ]
@@ -46,7 +46,7 @@ const ApprovalPopover: React.FC<{ approvals?: ApprovalStep[]; onClose: () => voi
       title: '[ 合約權責單位 ]',
       color: 'text-purple-600',
       items: [
-        { key: '合約權責單位經辦', label: '經辦' }, // Modified: label changed to '經辦'
+        { key: '合約權責單位經辦', label: '經辦' },
         { key: '權責-Team主管', label: 'Team主管' },
         { key: '權責-部主管', label: '部主管' }
       ]
@@ -61,7 +61,6 @@ const ApprovalPopover: React.FC<{ approvals?: ApprovalStep[]; onClose: () => voi
     {
       title: '[ 超過15日借閱 ]',
       color: 'text-red-600',
-      // 只有當合約中有「聯柏總經理」這個角色的簽核資料時，才視為需要顯示此區塊
       condition: (data: ApprovalStep[] | undefined) => data?.some(a => a.role === '聯柏總經理'),
       items: [
         { key: '聯柏總經理', label: '聯柏總經理' }
@@ -77,7 +76,6 @@ const ApprovalPopover: React.FC<{ approvals?: ApprovalStep[]; onClose: () => voi
       </div>
       <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto">
         {sections.map((section, sIdx) => {
-          // Check condition if it exists
           if (section.condition && !section.condition(approvals)) {
             return null;
           }
@@ -119,12 +117,11 @@ const ApprovalPopover: React.FC<{ approvals?: ApprovalStep[]; onClose: () => voi
   );
 };
 
-// Specific Mock Data for Lending List based on the screenshot
 const MOCK_LENDING_DATA: Contract[] = [
   {
     id: 'l1', no: 'LB20241115001', dept: '採購部', handler: '李大華', vendor: '東方物業管理', content: '大樓機房維護合約',
-    appDate: '2024/11/01', endDate: '2024/12/16', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
-    isLendingCompleted: false, // Initial state
+    appDate: '2024/11/01', endDate: '2024/12/16', startDate: '', finalDate: '', renewal: '', note: '',
+    isLendingCompleted: false,
     isManagerConfirmed: false,
     approvals: [
         { role: '借用單位經辦', name: '李大華', status: 'APPROVED', date: '2024/11/01' },
@@ -136,7 +133,7 @@ const MOCK_LENDING_DATA: Contract[] = [
   },
   {
     id: 'l2', no: 'LB20241010002', dept: '資訊處', handler: '張美芳', vendor: '全球通訊軟體', content: '雲端主機租賃服務協議 (超過15日)',
-    appDate: '2024/10/10', endDate: '2024/11/24', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
+    appDate: '2024/10/10', endDate: '2024/11/24', startDate: '', finalDate: '', renewal: '', note: '',
     isLendingCompleted: false,
     isManagerConfirmed: false,
     approvals: [
@@ -152,7 +149,7 @@ const MOCK_LENDING_DATA: Contract[] = [
   },
   {
     id: 'l3', no: 'LB20241201003', dept: '財務部', handler: '王志堅', vendor: '安信會計師事務所', content: '113年度審計服務委任',
-    appDate: '2024/11/15', endDate: '2024/12/30', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
+    appDate: '2024/11/15', endDate: '2024/12/30', startDate: '', finalDate: '', renewal: '', note: '',
     isLendingCompleted: true,
     isManagerConfirmed: true,
     approvals: [
@@ -161,28 +158,11 @@ const MOCK_LENDING_DATA: Contract[] = [
   },
   {
     id: 'l4', no: 'LB20240515001', dept: '業務二部', handler: '李小美', vendor: '2024年度測試廠商', content: '年度推廣合作協議',
-    appDate: '2024/06/01', endDate: '2024/07/16', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
+    appDate: '2024/06/01', endDate: '2024/07/16', startDate: '', finalDate: '', renewal: '', note: '',
+    isLendingCompleted: false,
     isManagerConfirmed: false,
     approvals: [{ role: '借用單位經辦', name: '李小美', status: 'APPROVED', date: '2024/06/01' }]
-  },
-  {
-    id: 'l5', no: 'LB20231120001', dept: '管理部', handler: '張大同', vendor: '2023年度測試廠商', content: '辦公設備租賃合約',
-    appDate: '2023/12/01', endDate: '2024/01/15', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
-    isManagerConfirmed: false,
-    approvals: [{ role: '借用單位經辦', name: '張大同', status: 'APPROVED', date: '2023/12/01' }]
-  },
-  {
-    id: 'l6', no: 'LB20250101001', dept: '資訊處', handler: '陳資訊', vendor: '微軟公司', content: 'Office 365 授權合約',
-    appDate: '2025/01/01', endDate: '2025/02/15', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
-    isManagerConfirmed: false,
-    approvals: [{ role: '借用單位經辦', name: '陳資訊', status: 'APPROVED', date: '2025/01/01' }]
-  },
-  {
-    id: 'l7', no: 'LB20250101002', dept: '管理部', handler: '林管理', vendor: '中興保全', content: '辦公室保全服務',
-    appDate: '2025/01/01', endDate: '2025/02/15', startDate: '', finalDate: '', renewal: '', note: '', // Modified: note cleared
-    isManagerConfirmed: false,
-    approvals: [{ role: '借用單位經辦', name: '林管理', status: 'APPROVED', date: '2025/01/01' }]
-  },
+  }
 ];
 
 const LendingList: React.FC = () => {
@@ -227,12 +207,6 @@ const LendingList: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (editFormData) {
-      setEditFormData({ ...editFormData, [name]: value });
-    }
-  };
-
-  const handleDateChange = (name: keyof Contract, value: string) => {
     if (editFormData) {
       setEditFormData({ ...editFormData, [name]: value });
     }
@@ -287,13 +261,21 @@ const LendingList: React.FC = () => {
     }
   };
 
-  // Fixed the content string for the checkmark to avoid arbitrary value parsing issues
-  const checkboxClass = "w-5 h-5 cursor-pointer appearance-none bg-white border border-gray-400 rounded checked:bg-white checked:border-[#007bff] relative flex items-center justify-center after:content-['✓'] after:hidden after:checked:block after:text-black after:text-xs after:font-bold shadow-sm";
-  const completedCheckboxClass = "w-5 h-5 cursor-pointer appearance-none bg-white border border-gray-400 rounded checked:bg-[#28a745] checked:border-[#28a745] relative flex items-center justify-center after:content-['✓'] after:hidden after:checked:block after:text-white after:text-xs after:font-bold shadow-sm";
+  // 統一勾選框樣式，確保 checked 狀態下可見且可點選
+  // 使用 appearance-none 配合 checked:before/after 來確保視覺回饋
+  const baseCheckboxStyle = "w-5 h-5 cursor-pointer appearance-none border border-gray-400 rounded bg-white relative flex items-center justify-center transition-all shadow-sm";
+  const completedCheckboxClass = `${baseCheckboxStyle} checked:bg-[#28a745] checked:border-[#28a745] after:content-['✓'] after:text-white after:text-xs after:font-bold after:opacity-0 checked:after:opacity-100`;
+  const defaultCheckboxClass = `${baseCheckboxStyle} checked:border-[#007bff] after:content-['✓'] after:text-black after:text-xs after:font-bold after:opacity-0 checked:after:opacity-100`;
 
   return (
     <div className="p-8 bg-white min-h-screen">
+      <h1 className="text-3xl text-center text-black mb-6 font-bold">合約借閱清單</h1>
       
+      <div className="mb-8 text-gray-500 text-[13px] leading-relaxed max-w-5xl bg-gray-50 p-4 border border-gray-200 rounded">
+        <p className="font-bold mb-1 text-gray-600">【註解說明】</p>
+        <p>1. 借閱完成請打勾。</p>
+      </div>
+
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3 flex-grow max-w-xl">
           <label className="text-black font-bold whitespace-nowrap">查詢欄</label>
@@ -346,7 +328,7 @@ const LendingList: React.FC = () => {
                     type="checkbox" 
                     onChange={handleSelectAll}
                     checked={filteredContracts.length > 0 && selectedIds.length === filteredContracts.length}
-                    className={checkboxClass}
+                    className={defaultCheckboxClass}
                   />
                 </th>
               )}
@@ -378,7 +360,7 @@ const LendingList: React.FC = () => {
                         type="checkbox" 
                         checked={isSelected}
                         onChange={() => handleSelectOne(contract.id)}
-                        className={checkboxClass}
+                        className={defaultCheckboxClass}
                       />
                     </td>
                   )}
